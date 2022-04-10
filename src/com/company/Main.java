@@ -15,8 +15,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         String URL;
-        //URL = "https://wonlf.tistory.com/entry/codeengn-basic-L11-%ED%92%80%EC%9D%B4";
-        System.out.print("PDF로 만들 Tistory URL을 입력하세요 : ");
+        URL = "https://wonlf.tistory.com/entry/codeengn-basic-L11-%ED%92%80%EC%9D%B4";
+        //System.out.print("PDF로 만들 Tistory URL을 입력하세요 : ");
         URL = scan.next();
 
         StringBuilder body = new StringBuilder();
@@ -57,8 +57,8 @@ public class Main {
 
             FileWriter fileWriter = new FileWriter(filePath); //2번째 인자로 true 넣으면 append옵션 활성화
 
-            imageUrlElements.prepend("<link rel=\"stylesheet\" href=\"./content.css\">");
-            imageUrlElements.prepend("<link rel=\"stylesheet\" href=\"./main.css\">");
+            imageUrlElements.prepend("<link rel=\"stylesheet\" href=\"C:\\Users\\zzoccom\\Desktop\\Tistory2PDF\\content.css\">");
+            imageUrlElements.prepend("<link rel=\"stylesheet\" href=\"C:\\Users\\zzoccom\\Desktop\\Tistory2PDF\\main.css\">");
 
             String html = imageUrlElements.toString();
 
