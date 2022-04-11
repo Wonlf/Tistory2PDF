@@ -11,13 +11,34 @@ import java.io.*;
 
 
 public class Main {
+    public static String execute(String cmd) {
+        try {
+            Process process = Runtime.getRuntime().exec("cmd /c " + cmd);
+            BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(process.getInputStream()));
+            String line = null;
+            StringBuffer sb = new StringBuffer();
+            sb.append(cmd);
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+                sb.append("\n");
+            }
+
+            System.out.println(sb.toString());
+            return sb.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
+
         Scanner scan = new Scanner(System.in);
         String URL;
-        URL = "https://wonlf.tistory.com/entry/codeengn-basic-L11-%ED%92%80%EC%9D%B4";
-        //System.out.print("PDF로 만들 Tistory URL을 입력하세요 : ");
-        URL = scan.next();
+        URL = "https://wonlf.tistory.com/entry/codeengn-basic-L14-%ED%92%80%EC%9D%B4";
+//        System.out.print("PDF로 만들 Tistory URL을 입력하세요 : ");
+//        URL = scan.next();
 
         StringBuilder body = new StringBuilder();
         Connection conn = Jsoup.connect(URL);
@@ -53,18 +74,32 @@ public class Main {
             rmElement9.remove();
             rmElement10.remove();
 
-
+            String name = "리버싱 문제풀이";
 
             FileWriter fileWriter = new FileWriter(filePath); //2번째 인자로 true 넣으면 append옵션 활성화
+            imageUrlElements.prepend("<link rel=\"stylesheet\" href=\"./content.css\">");
+            imageUrlElements.prepend("<link rel=\"stylesheet\" href=\"./main.css\">");
 
-            imageUrlElements.prepend("<link rel=\"stylesheet\" href=\"C:\\Users\\zzoccom\\Desktop\\Tistory2PDF\\content.css\">");
-            imageUrlElements.prepend("<link rel=\"stylesheet\" href=\"C:\\Users\\zzoccom\\Desktop\\Tistory2PDF\\main.css\">");
+            Element link = imageUrlElements.select(".p-category").first();
+            link.attr("href", "#");
+            link.text(name);
 
             String html = imageUrlElements.toString();
 
 
             fileWriter.write(html);
             fileWriter.close();
+
+
+            String inputpath = "C:\\Users\\a02\\Desktop\\Tistory2PDF-main\\Tistory2PDF-main\\tistory.html";
+            String outputpath = "C:\\Users\\a02\\Desktop\\Tistory2PDF-main\\Tistory2PDF-main\\ouyput.pdf";
+            String main = " start-process chrome -ArgumentList \"--enable-logging --headless --disable-gpu --print-to-pdf-no-header --print-to-pdf=" + outputpath + " " + inputpath + "\"";
+
+           // String main = "C:\\Users\\a02\\Desktop\\Tistory2PDF-main\\Tistory2PDF-main\\exec.bat";
+            System.out.println(main);
+
+            Main.execute(main);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
