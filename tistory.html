@@ -1,0 +1,90 @@
+<div id="container">
+ <link rel="stylesheet" href="./main.css">
+ <link rel="stylesheet" href="./content.css"> 
+ <div id="main" role="main"> <!-- content { --> 
+  <div id="content"> 
+   <section class="entry h-entry"> 
+    <div class="content-width"> 
+     <header class="hd"> 
+      <div class="hd-inner"> 
+       <h1 class="hd-heading lts-narrow p-name" role="heading"> <a href="/entry/codeengn-basic-L14-%ED%92%80%EC%9D%B4">codeengn-basic-L14 풀이</a> </h1> 
+       <div class="sub-info"> <span class="meta-cate"> <a href="#" class="p-category target-bread">리버싱 문제풀이</a> </span> / <span class="p-author h-card" rel="author" title="작성자"><a href="/guestbook">Wonlf</a></span> / <abbr class="timeago dt-published" title="2022. 4. 8. 15:17">2022. 4. 8. 15:17</abbr> 
+       </div> 
+      </div> 
+     </header> 
+     <div class="e-content post-content"> 
+      <div class="tt_article_useless_p_margin contents_style">
+       <p></p>
+       <figure class="imageblock alignCenter" data-origin-width="345" data-origin-height="282" data-ke-mobilestyle="alignCenter">
+        <span data-url="https://blog.kakaocdn.net/dn/cvWekR/btryOxDhb8F/EeuB1U1F6B6kkuy7UTI2m1/img.png" data-lightbox="lightbox" data-alt=""><img src="https://blog.kakaocdn.net/dn/cvWekR/btryOxDhb8F/EeuB1U1F6B6kkuy7UTI2m1/img.png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcvWekR%2FbtryOxDhb8F%2FEeuB1U1F6B6kkuy7UTI2m1%2Fimg.png" data-ke-mobilestyle="alignCenter"></span>
+       </figure>
+       <p></p> 
+       <p data-ke-size="size16">이번 문제는 Name이 CodeEngn일 때, Serial을 원한다.&nbsp;</p> 
+       <p data-ke-size="size16">문제에는 bruteforce가 필요하다고 하지만, 코드 짜는것 없이 풀 수 있었다.</p> 
+       <p data-ke-size="size16">&nbsp;</p> 
+       <p data-ke-size="size16">첫번째로 Die로 확인해보니 UPX로 패킹이 되어 있다.&nbsp;</p> 
+       <p></p>
+       <figure class="imageblock alignCenter" data-origin-width="723" data-origin-height="462" data-ke-mobilestyle="alignCenter">
+        <span data-url="https://blog.kakaocdn.net/dn/to955/btryKWZeHVK/zKhr4XKUTByh5NfoPaOl11/img.png" data-lightbox="lightbox" data-alt=""><img src="https://blog.kakaocdn.net/dn/to955/btryKWZeHVK/zKhr4XKUTByh5NfoPaOl11/img.png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fto955%2FbtryKWZeHVK%2FzKhr4XKUTByh5NfoPaOl11%2Fimg.png" data-ke-mobilestyle="alignCenter"></span>
+       </figure>
+       <p></p> 
+       <p data-ke-size="size16">언패커로 언패킹 해주고 디버거로 열어보면,</p> 
+       <p data-ke-size="size16">&nbsp;</p> 
+       <p data-ke-size="size16">&nbsp;</p> 
+       <p></p>
+       <figure class="imageblock alignCenter" data-origin-width="1323" data-origin-height="214" data-ke-mobilestyle="alignCenter">
+        <span data-url="https://blog.kakaocdn.net/dn/bB6pae/btryMnITwh2/dLeZyKsbwnFseXzW50GS9K/img.png" data-lightbox="lightbox" data-alt=""><img src="https://blog.kakaocdn.net/dn/bB6pae/btryMnITwh2/dLeZyKsbwnFseXzW50GS9K/img.png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbB6pae%2FbtryMnITwh2%2FdLeZyKsbwnFseXzW50GS9K%2Fimg.png" data-ke-mobilestyle="alignCenter"></span>
+       </figure>
+       <p></p> 
+       <p data-ke-size="size16">비교하는 구문을 찾았습니다. 저 두개가 같아야 Good Job이 출력 될 것 같다.</p> 
+       <p data-ke-size="size16">eax와 esi의 데이터를 알아보기 위해 브레이크 포인트를 걸고 확인했다.</p> 
+       <p data-ke-size="size16">&nbsp;</p> 
+       <p data-ke-size="size16">&nbsp;</p> 
+       <p></p>
+       <figure class="imagegridblock">
+        <div class="image-container">
+         <span data-url="https://blog.kakaocdn.net/dn/blgsKo/btryLHtxH8Q/iKxYl785INHQEU3MKmQZuK/img.png" data-lightbox="lightbox" data-origin-width="278" data-origin-height="229" data-is-animation="false" style="width: 39.6294%; margin-right: 10px;" data-widthpercent="40.1"><img src="https://blog.kakaocdn.net/dn/blgsKo/btryLHtxH8Q/iKxYl785INHQEU3MKmQZuK/img.png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FblgsKo%2FbtryLHtxH8Q%2FiKxYl785INHQEU3MKmQZuK%2Fimg.png"></span><span data-url="https://blog.kakaocdn.net/dn/cNHibg/btryJDFlXDy/XKjCQB2SuBr1ut9Ekr5shK/img.png" data-lightbox="lightbox" data-origin-width="185" data-origin-height="102" data-is-animation="false" data-widthpercent="59.9" style="width: 59.2079%;"><img src="https://blog.kakaocdn.net/dn/cNHibg/btryJDFlXDy/XKjCQB2SuBr1ut9Ekr5shK/img.png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcNHibg%2FbtryJDFlXDy%2FXKjCQB2SuBr1ut9Ekr5shK%2Fimg.png"></span>
+        </div>
+       </figure>
+       <p></p> 
+       <p data-ke-size="size16">serial에 12345를 입력 했을때 레지스터를 보면..</p> 
+       <p data-ke-size="size16">EAX는 3039 즉 10진수로 12345가 나온다. 이렇게 EAX는 serial에 입력한 값이 들어간다는 것을 알 수 있었다.</p> 
+       <p data-ke-size="size16">ESI를 129A1이라는 값이 들어 있는데 이것을 10진수로 확인해보면, 76193이 나온다.</p> 
+       <p data-ke-size="size16">Name = CodeEngn, Serial = 76193 이렇게 key가 나왔다.</p> 
+       <p data-ke-size="size16">&nbsp;</p> 
+       <p data-ke-size="size16">&nbsp;</p> 
+       <p data-ke-size="size16">ESI에 저런 값이 왜 들어갔는지 보면,</p> 
+       <p></p>
+       <figure class="imageblock alignCenter" data-origin-width="1179" data-origin-height="272" data-ke-mobilestyle="alignCenter">
+        <span data-url="https://blog.kakaocdn.net/dn/AHaS6/btryMZA2Nwr/msTU7g6sasCpHTAS0mXQw0/img.png" data-lightbox="lightbox" data-alt=""><img src="https://blog.kakaocdn.net/dn/AHaS6/btryMZA2Nwr/msTU7g6sasCpHTAS0mXQw0/img.png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FAHaS6%2FbtryMZA2Nwr%2FmsTU7g6sasCpHTAS0mXQw0%2Fimg.png" data-ke-mobilestyle="alignCenter"></span>
+       </figure>
+       <p></p> 
+       <p data-ke-size="size16">이런 암호화 방식을 통해 CodeEngn 문자열 을 암호화 하여 ESI에 넣었다.</p> 
+       <p data-ke-size="size16">&nbsp;</p> 
+       <p data-ke-size="size16">&nbsp;</p> 
+       <p data-ke-size="size16">EAX에는 입력한 값이 그대로 들어간 이유는 모르겠지만 숫자를 입력했을 때, 숫자가 그대로 eax에 저장되고,</p> 
+       <p data-ke-size="size16">문자열을 입력했을때 문자열과 관련없는 수가 eax에 저장되는 것을 봐서</p> 
+       <p data-ke-size="size16">아마 문자열과 숫자를 걸러주기 위한 함수가 아닐까 싶다.</p> 
+       <p></p>
+       <figure class="imageblock alignCenter" data-origin-width="1066" data-origin-height="347" data-ke-mobilestyle="alignCenter">
+        <span data-url="https://blog.kakaocdn.net/dn/egcUDx/btryPpSyQul/3E5g2G0KTiKF5yIHd2SWV0/img.png" data-lightbox="lightbox" data-alt=""><img src="https://blog.kakaocdn.net/dn/egcUDx/btryPpSyQul/3E5g2G0KTiKF5yIHd2SWV0/img.png" srcset="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FegcUDx%2FbtryPpSyQul%2F3E5g2G0KTiKF5yIHd2SWV0%2Fimg.png" data-ke-mobilestyle="alignCenter"></span>
+       </figure>
+       <p></p> 
+       <p data-ke-size="size16">&nbsp;</p> 
+       <p data-ke-size="size16">&nbsp;</p> 
+       <p data-ke-size="size16">bruteforce없이 풀 수 있는 문제였다.</p>
+      </div> <!-- SNS 공유 버튼 --> 
+      <div class="sns-go"> 
+       <ul> 
+        <li> </li> 
+        <li> </li> 
+        <li> </li> 
+        <li> </li> 
+       </ul> 
+      </div> 
+     </div>  <!-- 카테고리의 다른 글 -->   <!-- } post-reply --> 
+    </div> <!-- /.content-width --> 
+   </section>  
+  </div> <!-- } content -->  <!-- } sidebar --> 
+ </div> <!-- // aside --> 
+</div>

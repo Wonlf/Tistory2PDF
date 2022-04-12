@@ -11,33 +11,33 @@ import java.io.*;
 
 
 public class Main {
-    public static String execute(String cmd) {
-        try {
-            Process process = Runtime.getRuntime().exec("cmd /c " + cmd);
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(process.getInputStream()));
-            String line = null;
-            StringBuffer sb = new StringBuffer();
-            sb.append(cmd);
-            while ((line = reader.readLine()) != null) {
-                sb.append(line);
-                sb.append("\n");
-            }
-
-            System.out.println(sb.toString());
-            return sb.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
+//    public static String execute(String cmd) {
+//        try {
+//            Process process = Runtime.getRuntime().exec("cmd /c " + cmd);
+//            BufferedReader reader = new BufferedReader(
+//                    new InputStreamReader(process.getInputStream()));
+//            String line = null;
+//            StringBuffer sb = new StringBuffer();
+//            sb.append(cmd);
+//            while ((line = reader.readLine()) != null) {
+//                sb.append(line);
+//                sb.append("\n");
+//            }
+//
+//            System.out.println(sb.toString());
+//            return sb.toString();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
     public static void main(String[] args) {
 
         Scanner scan = new Scanner(System.in);
         String URL;
         URL = "https://wonlf.tistory.com/entry/codeengn-basic-L14-%ED%92%80%EC%9D%B4";
-//        System.out.print("PDFë¡œ ë§Œë“¤ Tistory URLì„ ì…ë ¥í•˜ì„¸ìš” : ");
+//        System.out.print("PDF·Î ¸¸µé Tistory URLÀ» ÀÔ·ÂÇÏ¼¼¿ä : ");
 //        URL = scan.next();
 
         StringBuilder body = new StringBuilder();
@@ -51,16 +51,16 @@ public class Main {
 
             Element imageUrlElements = document.getElementById("container");
 
-            Elements sidebarElement =  imageUrlElements.select("#sidebar"); //ì‚¬ì´ë“œë°”
+            Elements sidebarElement =  imageUrlElements.select("#sidebar"); //»çÀÌµå¹Ù
             Elements rmElement1 =  imageUrlElements.select("#lightbox");
             Elements rmElement2 =  imageUrlElements.select("#lightboxOverlay");
-            Elements rmElement3 =  imageUrlElements.select(".entry-tag"); //ë¸”ë¡œê·¸ ê¸€ íƒœê·¸
-            Elements rmElement4 =  imageUrlElements.select(".container_postbtn"); //íƒœê·¸
-            Elements rmElement5 =  imageUrlElements.select(".another_category"); //ë‹¤ë¥¸ê¸€
-            //Elements rmElement6 =  imageUrlElements.select(".sns-go"); //sns ì•„ë˜ë¥¼ ë„ì›Œì¤˜ì„œ êµ³ì´ ì§€ìš¸ í•„ìš” ì—†ì„ ë“¯
-            Elements rmElement7 =  imageUrlElements.select(".area_related_wrap"); //ê´€ë ¨ê¸€
-            Elements rmElement8 =  imageUrlElements.select(".post-reply"); //ëŒ“ê¸€
-            Elements rmElement9 =  imageUrlElements.select("#paging"); //í˜ì´ì§•
+            Elements rmElement3 =  imageUrlElements.select(".entry-tag"); //ºí·Î±× ±Û ÅÂ±×
+            Elements rmElement4 =  imageUrlElements.select(".container_postbtn"); //ÅÂ±×
+            Elements rmElement5 =  imageUrlElements.select(".another_category"); //´Ù¸¥±Û
+            //Elements rmElement6 =  imageUrlElements.select(".sns-go"); //sns ¾Æ·¡¸¦ ¶ç¿öÁà¼­ ±»ÀÌ Áö¿ï ÇÊ¿ä ¾øÀ» µí
+            Elements rmElement7 =  imageUrlElements.select(".area_related_wrap"); //°ü·Ã±Û
+            Elements rmElement8 =  imageUrlElements.select(".post-reply"); //´ñ±Û
+            Elements rmElement9 =  imageUrlElements.select("#paging"); //ÆäÀÌÂ¡
             Elements rmElement10 =  cssElement.select("script");
             sidebarElement.remove();
             rmElement1.remove();
@@ -74,9 +74,9 @@ public class Main {
             rmElement9.remove();
             rmElement10.remove();
 
-            String name = "ë¦¬ë²„ì‹± ë¬¸ì œí’€ì´";
+            String name = "¸®¹ö½Ì ¹®Á¦Ç®ÀÌ";
 
-            FileWriter fileWriter = new FileWriter(filePath); //2ë²ˆì§¸ ì¸ìë¡œ true ë„£ìœ¼ë©´ appendì˜µì…˜ í™œì„±í™”
+            FileWriter fileWriter = new FileWriter(filePath); //2¹øÂ° ÀÎÀÚ·Î true ³ÖÀ¸¸é append¿É¼Ç È°¼ºÈ­
             imageUrlElements.prepend("<link rel=\"stylesheet\" href=\"./content.css\">");
             imageUrlElements.prepend("<link rel=\"stylesheet\" href=\"./main.css\">");
 
@@ -91,14 +91,14 @@ public class Main {
             fileWriter.close();
 
 
-            String inputpath = "C:\\Users\\a02\\Desktop\\Tistory2PDF-main\\Tistory2PDF-main\\tistory.html";
-            String outputpath = "C:\\Users\\a02\\Desktop\\Tistory2PDF-main\\Tistory2PDF-main\\ouyput.pdf";
-            String main = " start-process chrome -ArgumentList \"--enable-logging --headless --disable-gpu --print-to-pdf-no-header --print-to-pdf=" + outputpath + " " + inputpath + "\"";
+            String inputpath = "C:\\Users\\zzoccom\\Desktop\\Tistory2PDF\\tistory.html"; //¿ÖÀÎÁö Àı´ë°æ·Î·Î ÀÛ¼ºÇØ¾ß Ä¿¸Çµå°¡ ¸ÔÈû
+            String outputpath = "C:\\Users\\zzoccom\\Desktop\\Tistory2PDF\\out.pdf";
 
-           // String main = "C:\\Users\\a02\\Desktop\\Tistory2PDF-main\\Tistory2PDF-main\\exec.bat";
+            String main = "Application\\chrome.exe --enable-logging --headless --disable-gpu --print-to-pdf-no-header --print-to-pdf=" + outputpath + " " + inputpath;
             System.out.println(main);
 
-            Main.execute(main);
+            Process proc = Runtime.getRuntime().exec(main);
+
 
         } catch (IOException e) {
             e.printStackTrace();
