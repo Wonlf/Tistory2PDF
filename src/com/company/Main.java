@@ -11,37 +11,9 @@ import java.io.*;
 
 
 public class Main {
-//    public static String execute(String cmd) {
-//        try {
-//            Process process = Runtime.getRuntime().exec("cmd /c " + cmd);
-//            BufferedReader reader = new BufferedReader(
-//                    new InputStreamReader(process.getInputStream()));
-//            String line = null;
-//            StringBuffer sb = new StringBuffer();
-//            sb.append(cmd);
-//            while ((line = reader.readLine()) != null) {
-//                sb.append(line);
-//                sb.append("\n");
-//            }
-//
-//            System.out.println(sb.toString());
-//            return sb.toString();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
 
-    public static void main(String[] args) {
-
-        Scanner scan = new Scanner(System.in);
-        String URL;
-        URL = "https://wonlf.tistory.com/entry/codeengn-basic-L14-%ED%92%80%EC%9D%B4";
-//        System.out.print("PDF로 만들 Tistory URL을 입력하세요 : ");
-//        URL = scan.next();
-
-        StringBuilder body = new StringBuilder();
-        Connection conn = Jsoup.connect(URL);
+    public static void parsing(String url_path, int count){
+        Connection conn = Jsoup.connect(url_path);
         String filePath = "./tistory.html";
 
         try {
@@ -62,6 +34,7 @@ public class Main {
             Elements rmElement8 =  imageUrlElements.select(".post-reply"); //댓글
             Elements rmElement9 =  imageUrlElements.select("#paging"); //페이징
             Elements rmElement10 =  cssElement.select("script");
+            Elements rmElement11 =  imageUrlElements.select(".revenue_unit_wrap ");
             sidebarElement.remove();
             rmElement1.remove();
             rmElement2.remove();
@@ -73,6 +46,7 @@ public class Main {
             rmElement8.remove();
             rmElement9.remove();
             rmElement10.remove();
+            rmElement11.remove();
 
             String name = "리버싱 문제풀이";
 
@@ -86,16 +60,17 @@ public class Main {
 
             String html = imageUrlElements.toString();
 
-
             fileWriter.write(html);
             fileWriter.close();
 
+//            for (int i=1; i<=12; i++)
+
 
             String inputpath = "C:\\Users\\zzoccom\\Desktop\\Tistory2PDF\\tistory.html"; //왜인지 절대경로로 작성해야 커맨드가 먹힘
-            String outputpath = "C:\\Users\\zzoccom\\Desktop\\Tistory2PDF\\out.pdf";
+            String outputpath = "C:\\Users\\zzoccom\\Desktop\\Tistory2PDF\\codeengn-basic-L"+ count +".pdf";
 
             String main = "Application\\chrome.exe --enable-logging --headless --disable-gpu --print-to-pdf-no-header --print-to-pdf=" + outputpath + " " + inputpath;
-            System.out.println(main);
+
 
             Process proc = Runtime.getRuntime().exec(main);
 
@@ -103,6 +78,40 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public String padLeftZeros(String inputString, int length) {
+        if (inputString.length() >= length) {
+            return inputString;
+        }
+        StringBuilder sb = new StringBuilder();
+        while (sb.length() < length - inputString.length()) {
+            sb.append('0');
+        }
+        sb.append(inputString);
+
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+
+        Scanner scan = new Scanner(System.in);
+        String URL;
+        URL = "https://wonlf.tistory.com/entry/codeengn-basic-L14-%ED%92%80%EC%9D%B4";
+//        System.out.print("PDF로 만들 Tistory URL을 입력하세요 : ");
+//        URL = scan.next();
+
+        for (int i = 1; i <= 14; i++) {
+            if(i < 10){
+                parsing("https://wonlf.tistory.com/entry/codeengn-basic-L" + "0" + i + "-%ED%92%80%EC%9D%B4", i);
+
+            }
+            else{
+                parsing("https://wonlf.tistory.com/entry/codeengn-basic-L" + i + "-%ED%92%80%EC%9D%B4", i);
+            }//문자열 구분하는 거나 직접 url을 카테고리에서 가져와야 할듯 형식이 다 다름.
+
+        }
+
 
     }
 }
