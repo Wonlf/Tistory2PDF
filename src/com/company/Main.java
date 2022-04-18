@@ -5,14 +5,13 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-
 import java.io.IOException;
 import java.io.*;
-
+import java.util.ArrayList;
 
 public class Main {
 
-    public static void parsing(String url_path, int count){
+    public static void parsing(String url_path, String fn){
         Connection conn = Jsoup.connect(url_path);
         String filePath = "./tistory.html";
 
@@ -58,16 +57,19 @@ public class Main {
             link.attr("href", "#");
             link.text(name);
 
+
             String html = imageUrlElements.toString();
 
             fileWriter.write(html);
             fileWriter.close();
 
-//            for (int i=1; i<=12; i++)
 
 
             String inputpath = "C:\\Users\\zzoccom\\Desktop\\Tistory2PDF\\tistory.html"; //왜인지 절대경로로 작성해야 커맨드가 먹힘
-            String outputpath = "C:\\Users\\zzoccom\\Desktop\\Tistory2PDF\\codeengn-basic-L"+ count +".pdf";
+            String outputpath = "C:\\Users\\zzoccom\\Desktop\\Tistory2PDF\\report\\"+ fn +".pdf";
+
+            System.out.println(url_path);
+            System.out.println(outputpath);
 
             String main = "Application\\chrome.exe --enable-logging --headless --disable-gpu --print-to-pdf-no-header --print-to-pdf=" + outputpath + " " + inputpath;
 
@@ -80,36 +82,45 @@ public class Main {
         }
     }
 
-    public String padLeftZeros(String inputString, int length) {
-        if (inputString.length() >= length) {
-            return inputString;
-        }
-        StringBuilder sb = new StringBuilder();
-        while (sb.length() < length - inputString.length()) {
-            sb.append('0');
-        }
-        sb.append(inputString);
-
-        return sb.toString();
-    }
 
     public static void main(String[] args) {
 
-        Scanner scan = new Scanner(System.in);
-        String URL;
-        URL = "https://wonlf.tistory.com/entry/codeengn-basic-L14-%ED%92%80%EC%9D%B4";
+//        Scanner scan = new Scanner(System.in);
+//        String URL;
+//        URL = "https://wonlf.tistory.com/entry/codeengn-basic-L14-%ED%92%80%EC%9D%B4";
 //        System.out.print("PDF로 만들 Tistory URL을 입력하세요 : ");
 //        URL = scan.next();
 
-        for (int i = 1; i <= 14; i++) {
-            if(i < 10){
-                parsing("https://wonlf.tistory.com/entry/codeengn-basic-L" + "0" + i + "-%ED%92%80%EC%9D%B4", i);
+        ArrayList<String> attr_href_string = new ArrayList<String>();
+        ArrayList<String> title_string = new ArrayList<String>();
 
+
+        for (int i = 1; ; i++) {
+            String url_path = "https://wonlf.tistory.com/category/%EB%A6%AC%EB%B2%84%EC%8B%B1%20%EB%AC%B8%EC%A0%9C%20%ED%92%80%EC%9D%B4?page=" + i;
+            Connection conn = Jsoup.connect(url_path);
+            try {
+                Document document = conn.get();
+                Elements Href = document.select(".post_link");
+                Elements Title = document.select(".post_title");
+                for(Element e : Href){
+                    String a = e.attr("href");
+                    attr_href_string.add("https://wonlf.tistory.com" + a);
+                }
+
+                for(Element e : Title){
+                    String a = e.text();
+                    title_string.add(a);
+                }
             }
-            else{
-                parsing("https://wonlf.tistory.com/entry/codeengn-basic-L" + i + "-%ED%92%80%EC%9D%B4", i);
-            }//문자열 구분하는 거나 직접 url을 카테고리에서 가져와야 할듯 형식이 다 다름.
+            catch (IOException e) {
+                e.printStackTrace();
+                break;
+            }
+        }
 
+
+        for (int i = 0; i < attr_href_string.size(); i++) {
+            parsing(attr_href_string.get(i), title_string.get(i).replaceAll(" ", "_"));
         }
 
 
