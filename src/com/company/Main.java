@@ -15,6 +15,7 @@ public class Main {
         Connection conn = Jsoup.connect(url_path);
         String filePath = "./tistory.html";
 
+        //비동기 처리?
         try {
             Document document = conn.get();
             Elements cssElement = document.getElementsByTag("head");
@@ -96,7 +97,8 @@ public class Main {
 
 
         for (int i = 1; ; i++) {
-            String url_path = "https://wonlf.tistory.com/category/%EB%A6%AC%EB%B2%84%EC%8B%B1%20%EB%AC%B8%EC%A0%9C%20%ED%92%80%EC%9D%B4?page=" + i;
+            String url_path = "https://wonlf.tistory.com/category/%EB%A6%AC%EB%B2%84%EC%8B%B1%20%EB%AC%B8%EC%A0%9C%20%ED%92%80%EC%9D%B4/CodeEngn.com_Basic%20%28Clear%29?page=" + i;
+            //only codeengn
             Connection conn = Jsoup.connect(url_path);
             try {
                 Document document = conn.get();
